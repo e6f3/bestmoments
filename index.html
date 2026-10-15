@@ -133,7 +133,7 @@ svg.innerHTML=s;
 
 // snow
 const cv=document.getElementById('snow'),ctx=cv.getContext('2d');let Wee,Hee,flakesss=[];
-function size(){Wee=cv.width=innerWidth;Hee=cv.height=innerHeight;flakes=Array.from({length:Math.min(90,Math.floor(Wee/12))},()=>({x:Math.random()*Wee,y:Math.random()*Hee,r:Math.random()*2.4+.6,v:Math.random()*.8+.3,d:Math.random()*6}))}
+function size(){Wee=cv.width=innerWidth;Hee=cv.height=innerHeight;flakesss=Array.from({length:Math.min(90,Math.floor(Wee/12))},()=>({x:Math.random()*Wee,y:Math.random()*Hee,r:Math.random()*2.4+.6,v:Math.random()*.8+.3,d:Math.random()*6}))}
 size();addEventListener('resize',size);
 if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
  (function tick(t){ctx.clearRect(0,0,Wee,Hee);ctx.fillStyle='rgba(255,255,255,.8)';
