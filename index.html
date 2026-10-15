@@ -132,12 +132,12 @@ for(let i=0;i<12;i++){const x=50+i*100,c=cols[i%5];s+=`<g class="bulb"><ellipse 
 svg.innerHTML=s;
 
 // snow
-const cv=document.getElementById('snow'),ctx=cv.getContext('2d');let W,H,flakes=[];
-function size(){W=cv.width=innerWidth;H=cv.height=innerHeight;flakes=Array.from({length:Math.min(90,Math.floor(W/12))},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*2.4+.6,v:Math.random()*.8+.3,d:Math.random()*6}))}
+const cv=document.getElementById('snow'),ctx=cv.getContext('2d');let Wee,Hee,flakesss=[];
+function size(){Wee=cv.width=innerWidth;Hee=cv.height=innerHeight;flakes=Array.from({length:Math.min(90,Math.floor(Wee/12))},()=>({x:Math.random()*Wee,y:Math.random()*Hee,r:Math.random()*2.4+.6,v:Math.random()*.8+.3,d:Math.random()*6}))}
 size();addEventListener('resize',size);
 if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
- (function tick(t){ctx.clearRect(0,0,W,H);ctx.fillStyle='rgba(255,255,255,.8)';
-  flakes.forEach(f=>{f.y+=f.v;f.x+=Math.sin(t/1500+f.d)*.4;if(f.y>H+5){f.y=-5;f.x=Math.random()*W}
+ (function tick(t){ctx.clearRect(0,0,Wee,Hee);ctx.fillStyle='rgba(255,255,255,.8)';
+  flakesss.forEach(f=>{f.y+=f.v;f.x+=Math.sin(t/1500+f.d)*.4;if(f.y>Hee+5){f.y=-5;f.x=Math.random()*Wee}
    ctx.beginPath();ctx.arc(f.x,f.y,f.r,0,6.3);ctx.fill()});requestAnimationFrame(tick)})(0)}
 </script>
 </body>
