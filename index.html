@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>My Merriest Moments</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:dark;
+  --pine:#0b231e; --deep:#06150f; --cran:#b3243f; --gold:#f0c36a; --snow:#faf5ea; --mist:#b9cbc3;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(120% 60% at 50% 0%,#14392f 0%,var(--pine) 45%,var(--deep) 100%);background-color:var(--deep);color:var(--snow);font-family:'DM Sans',system-ui,sans-serif;line-height:1.65;overflow-x:hidden}
+canvas#snow{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+main,header,footer{position:relative;z-index:1}
+
+/* hero */
+header{text-align:center;padding:5.5rem 1.5rem 3rem}
+.lights{position:absolute;top:0;left:0;right:0;height:70px;pointer-events:none}
+.lights svg{width:100%;height:100%}
+.bulb{animation:glow 3s ease-in-out infinite}
+.bulb:nth-child(3n+1){animation-delay:-1s}.bulb:nth-child(3n+2){animation-delay:-2s}
+@keyframes glow{0%,100%{opacity:.35}50%{opacity:1}}
+h1{font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:clamp(2.8rem,10vw,6.5rem);line-height:1;margin:1.2rem 0 1rem;letter-spacing:-.02em;
+  background:linear-gradient(180deg,#fff7df,var(--gold) 70%,#c78f2e);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{font-family:'Fraunces',Georgia,serif;font-style:italic;font-size:clamp(1.1rem,3vw,1.5rem);color:var(--mist);max-width:34ch;margin:0 auto}
+.star{font-size:2.6rem;color:var(--gold);filter:drop-shadow(0 0 14px rgba(240,195,106,.8));animation:float 5s ease-in-out infinite;display:inline-block}
+@keyframes float{50%{transform:translateY(-8px) rotate(6deg)}}
+.hint{margin-top:2rem;font-size:.95rem;color:var(--mist)}
+
+/* timeline */
+main{max-width:860px;margin:0 auto;padding:1rem 1.25rem 4rem}
+.line{position:relative}
+.line::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:2px;transform:translateX(-50%);
+  background:repeating-linear-gradient(180deg,var(--gold) 0 8px,transparent 8px 18px);opacity:.35}
+.moment{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:center;margin:3.5rem 0}
+.moment:nth-child(even) .gift{order:2}
+.gift{justify-self:end;position:relative;width:min(100%,260px);aspect-ratio:1;border:0;background:none;cursor:pointer;color:inherit;padding:0;font:inherit}
+.moment:nth-child(even) .gift{justify-self:start}
+.gift:focus-visible{outline:3px solid var(--gold);outline-offset:6px;border-radius:50%}
+.orb{position:absolute;inset:14%;border-radius:50%;display:grid;place-items:center;font-size:3.6rem;
+  background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.55),transparent 28%),radial-gradient(circle at 50% 50%,var(--c1),var(--c2));
+  box-shadow:0 18px 40px rgba(0,0,0,.45),0 0 0 3px rgba(255,255,255,.06),inset -10px -14px 26px rgba(0,0,0,.35);transition:transform .5s cubic-bezier(.3,1.6,.5,1)}
+.orb::before{content:"";position:absolute;top:-17px;left:50%;width:30px;height:22px;transform:translateX(-50%);background:linear-gradient(90deg,#9b7a2c,var(--gold),#9b7a2c);border-radius:4px 4px 2px 2px}
+.orb::after{content:"";position:absolute;top:-34px;left:50%;width:16px;height:20px;transform:translateX(-50%);border:2px solid var(--gold);border-bottom:0;border-radius:10px 10px 0 0}
+.gift:hover .orb{transform:scale(1.06) rotate(-4deg)}
+.moment.open .orb{transform:scale(1.1) rotate(0);box-shadow:0 18px 50px rgba(0,0,0,.45),0 0 60px var(--glow)}
+.moment[data-i="0"]{--c1:#e24b66;--c2:#7d1328;--glow:rgba(226,75,102,.5)}
+.moment[data-i="1"]{--c1:#4aa387;--c2:#0f4a3a;--glow:rgba(74,163,135,.5)}
+.moment[data-i="2"]{--c1:#f6d27e;--c2:#a8741b;--glow:rgba(240,195,106,.55)}
+.moment[data-i="3"]{--c1:#7db4e8;--c2:#27508a;--glow:rgba(125,180,232,.5)}
+.moment[data-i="4"]{--c1:#f2a0b8;--c2:#a52b57;--glow:rgba(242,160,184,.5)}
+.moment[data-i="5"]{--c1:#c9b5f0;--c2:#5a3c97;--glow:rgba(201,181,240,.5)}
+.card{background:linear-gradient(160deg,rgba(250,245,234,.09),rgba(250,245,234,.03));border:1px solid rgba(240,195,106,.22);border-radius:22px;padding:1.6rem 1.7rem;backdrop-filter:blur(6px)}
+.moment:nth-child(even) .card{order:1}
+.year{font-family:'Fraunces',Georgia,serif;font-style:italic;color:var(--gold);font-size:1.05rem}
+h2{font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:1.7rem;line-height:1.15;margin:.2rem 0 .6rem}
+.card p{margin:0;color:#e6e2d6;max-width:46ch}
+.more{display:grid;grid-template-rows:0fr;transition:grid-template-rows .6s ease}
+.more>div{overflow:hidden}
+.open .more{grid-template-rows:1fr}
+.more p{padding-top:.8rem;font-family:'Fraunces',Georgia,serif;font-style:italic;color:var(--gold)}
+.tag{display:inline-block;margin-top:.9rem;font-size:.85rem;color:var(--mist)}
+.open .tag{display:none}
+
+footer{text-align:center;padding:2rem 1.5rem 5rem}
+footer p{font-family:'Fraunces',Georgia,serif;font-style:italic;font-size:1.4rem;color:var(--gold);margin:.5rem 0}
+footer small{color:var(--mist)}
+
+@media(max-width:700px){
+  .line::before{left:34px}
+  .moment,.moment:nth-child(even){grid-template-columns:1fr;gap:1.2rem;margin:3rem 0;padding-left:0}
+  .gift,.moment:nth-child(even) .gift{justify-self:center;order:0;width:200px}
+  .moment:nth-child(even) .card{order:0}
+  .line::before{left:50%;opacity:.2}
+  h1{margin-top:1.6rem}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<canvas id="snow" aria-hidden="true"></canvas>
+
+<header>
+  <div class="lights" aria-hidden="true"><svg id="lights" viewBox="0 0 1200 70" preserveAspectRatio="none"></svg></div>
+  <div class="star">★</div>
+  <h1>My Merriest Moments</h1>
+  <p class="sub">A little tree-full of the days that made life glow.</p>
+  <p class="hint">Tap an ornament to unwrap a memory.</p>
+</header>
+
+<main>
+  <div class="line" id="list"></div>
+</main>
+
+<footer>
+  <div class="star" style="font-size:1.8rem">✦</div>
+  <p>And the best gift is still unwrapping.</p>
+  <small>Merry Christmas &amp; a happy everything.</small>
+</footer>
+
+<script>
+const moments=[
+ {e:"🎄",y:"Somewhere around age 6",t:"The First Christmas I Really Remember",s:"Creeping downstairs before sunrise to find the tree glowing in the dark.",m:"Nobody was awake yet. It was just me, the lights, and the feeling that anything could happen."},
+ {e:"⛄",y:"A snowy afternoon",t:"The Snowman That Got Too Tall",s:"We built him until our mittens froze, then gave him a carrot and a very serious scarf.",m:"Hot chocolate has never tasted better than it did after that."},
+ {e:"🍪",y:"Every December",t:"Cookies in the Kitchen",s:"Flour on everything, music on, and the first batch always vanishing before it cooled.",m:"The kitchen smelled like cinnamon, and for a few hours nothing else mattered."},
+ {e:"✈️",y:"One big adventure",t:"The Trip I'll Never Forget",s:"Bags packed, tickets in hand, and a view that made the whole world feel bigger.",m:"I came home with a camera full of photos and a heart full of plans."},
+ {e:"🎓",y:"The proud day",t:"The Day It All Paid Off",s:"All the late nights and hard work, and then one moment on stage with everyone cheering.",m:"I looked into the crowd and saw the people who believed in me first."},
+ {e:"❤️",y:"A winter evening",t:"The People Who Feel Like Home",s:"A full table, too much food, laughing until it hurt, and nowhere else I wanted to be.",m:"Some moments don't need a photo. You just keep them."}
+];
+const list=document.getElementById('list');
+moments.forEach((o,i)=>{
+  const el=document.createElement('section');
+  el.className='moment'+(i===0?' open':'');el.dataset.i=i;
+  el.innerHTML=`<button class="gift" aria-expanded="${i===0}" aria-label="Unwrap: ${o.t}"><span class="orb">${o.e}</span></button>
+  <div class="card"><div class="year">${o.y}</div><h2>${o.t}</h2><p>${o.s}</p>
+  <div class="more"><div><p>${o.m}</p></div></div><span class="tag">Tap the ornament to unwrap</span></div>`;
+  const b=el.querySelector('button');
+  b.addEventListener('click',()=>{const on=el.classList.toggle('open');b.setAttribute('aria-expanded',on)});
+  list.appendChild(el);
+});
+
+// string of lights
+const svg=document.getElementById('lights');const cols=['#e24b66','#f0c36a','#4aa387','#7db4e8','#f2a0b8'];
+let s='<path d="M0 8 Q 50 46 100 8 T 200 8 T 300 8 T 400 8 T 500 8 T 600 8 T 700 8 T 800 8 T 900 8 T 1000 8 T 1100 8 T 1200 8" fill="none" stroke="#2c4a3f" stroke-width="2"/>';
+for(let i=0;i<12;i++){const x=50+i*100,c=cols[i%5];s+=`<g class="bulb"><ellipse cx="${x}" cy="40" rx="7" ry="10" fill="${c}"/><ellipse cx="${x}" cy="40" rx="16" ry="18" fill="${c}" opacity=".25"/></g>`}
+svg.innerHTML=s;
+
+// snow
+const cv=document.getElementById('snow'),ctx=cv.getContext('2d');let W,H,flakes=[];
+function size(){W=cv.width=innerWidth;H=cv.height=innerHeight;flakes=Array.from({length:Math.min(90,Math.floor(W/12))},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*2.4+.6,v:Math.random()*.8+.3,d:Math.random()*6}))}
+size();addEventListener('resize',size);
+if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
+ (function tick(t){ctx.clearRect(0,0,W,H);ctx.fillStyle='rgba(255,255,255,.8)';
+  flakes.forEach(f=>{f.y+=f.v;f.x+=Math.sin(t/1500+f.d)*.4;if(f.y>H+5){f.y=-5;f.x=Math.random()*W}
+   ctx.beginPath();ctx.arc(f.x,f.y,f.r,0,6.3);ctx.fill()});requestAnimationFrame(tick)})(0)}
+</script>
+</body>
+</html>
